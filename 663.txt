@@ -1,0 +1,29 @@
+class Solution {
+    private int sum=0;
+    private boolean ans=false;
+    private TreeNode r=null;
+    public boolean checkEqualTree(TreeNode root) {
+        r=root;
+        sum=dfs1(root);
+        dfs2(root);
+        return ans;
+    }
+    
+    public int dfs1(TreeNode node){
+        if (node==null)
+            return 0;
+        int s1=dfs1(node.left);
+        int s2=dfs1(node.right);
+        return s1+s2+node.val;
+    }
+    
+    public int dfs2(TreeNode node){
+        if (node==null)
+            return 0;
+        int s1=dfs2(node.left);
+        int s2=dfs2(node.right);
+        if ((s1+s2+node.val)*2==sum&&node!=r)
+            ans=true;
+        return s1+s2+node.val;
+    }
+}
