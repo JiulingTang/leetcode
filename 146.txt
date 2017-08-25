@@ -1,0 +1,66 @@
+class Rec{
+    public:
+    int key;
+    int t;
+  
+    Rec(int k,int v){
+        key=k;
+        t=v;
+    }
+};
+class LRUCache {
+    vector<Rec> queue;
+    int st;
+
+    map<int,int> m;
+    map<int,int> it;
+    int t;
+    int n;
+    int cap;
+public:
+    LRUCache(int capacity) {
+        t=0;
+        st=0;
+        
+        cap=capacity;
+        n=0;
+    }
+    
+    int get(int key) {
+        if (m.find(key)==m.end()||m[key]==-1)
+            return -1;
+        else {
+            it[key]=t;
+            queue.push_back(Rec(key,t));
+            t++;
+            return m[key];
+        }
+
+    }
+    
+    void put(int key, int value) {
+        if (m.find(key)==m.end()||m[key]==-1){
+            if (n==cap){
+                while (st<queue.size()){
+                    int rkey=queue[st].key;
+                    int rt=queue[st].t;
+                    st++;
+                    if (it[rkey]==rt){
+                        cout<<rkey;
+                        m[rkey]=-1;
+                        break;
+                    }
+                }
+            }
+            else
+                n++;
+
+        }
+        m[key]=value;
+        it[key]=t;
+        queue.push_back(Rec(key,t));
+        t++;
+    
+        
+    }
+};
