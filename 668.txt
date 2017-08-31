@@ -1,0 +1,17 @@
+class Solution {
+    public int findKthNumber(int m, int n, int k) {
+        long l=1;
+        long r=m*n;
+        while (l<=r){
+            long mid=(l+r)/2;
+            long s=0;
+            for (int i=1;i<=m;i++)
+                s+=mid/i<n?mid/i:n;
+            if (s<k)
+                l=mid+1;
+            else
+                r=mid-1;
+        }
+        return (int)l;
+    }
+}
